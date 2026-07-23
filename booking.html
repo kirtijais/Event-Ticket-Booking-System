@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ticket Booking Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 30px auto; padding: 20px; background-color: #f8f9fa; }
+    .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; }
+    input, select { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+    button { background-color: #007bff; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; }
+    button:hover { background-color: #0056b3; }
+    
+    /* Ticket Styles */
+    #ticketPage { display: none; }
+    .ticket {
+      border: 2px dashed #007bff;
+      background: #f0f7ff;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 15px;
+      position: relative;
+    }
+    .ticket-header { border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 15px; text-align: center; }
+    .ticket-header h2 { margin: 0; color: #007bff; }
+    .ticket-body p { margin: 8px 0; font-size: 15px; }
+    .ticket-id { font-family: monospace; font-size: 14px; background: #e0eeff; padding: 3px 6px; border-radius: 4px; }
+    .action-btns { margin-top: 20px; display: flex; gap: 10px; }
+    .btn-secondary { background-color: #6c757d; }
+    .btn-secondary:hover { background-color: #5a6268; }
+
+    /* Print styles */
+    @media print {
+      body { background: white; margin: 0; }
+      .no-print { display: none !important; }
+      #ticketPage { display: block !important; }
+      .ticket { border: 2px solid #000; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Booking Form Screen -->
+  <div id="formPage" class="card">
+    <h2>Book Your Ticket</h2>
+    <form id="bookingForm">
+      <div class="form-group">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" required placeholder="John Doe">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" required placeholder="john@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="event">Select Event / Category:</label>
+        <select id="event" required>
+          <option value="Tech Conference 2026">Tech Conference 2026</option>
+          <option value="Music Concert - VIP Pass">Music Concert - VIP Pass</option>
+          <option value="Design Workshop">Design Workshop</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="ticketsCount">Number of Tickets:</label>
+        <input type="number" id="ticketsCount" min="1" max="10" value="1" required>
+      </div>
+
+      <button type="submit">Book Ticket Now</button>
+    </form>
+  </div>
+
+  <!-- Generated Ticket Screen -->
+  <div id="ticketPage" class="card">
+    <div class="ticket">
+      <div class="ticket-header">
+        <h2>🎟️ TICKET CONFIRMED</h2>
+        <p style="margin: 5px 0 0 0; color: #555;">Present this pass at entry</p>
+      </div>
+      <div class="ticket-body">
+        <p><strong>Ticket ID:</strong> <span id="ticketId" class="ticket-id"></span></p>
+        <p><strong>Passenger / Guest:</strong> <span id="ticketName"></span></p>
+        <p><strong>Email:</strong> <span id="ticketEmail"></span></p>
+        <p><strong>Event:</strong> <span id="ticketEvent"></span></p>
+        <p><strong>Quantity:</strong> <span id="ticketQty"></span> ticket(s)</p>
+        <p><strong>Booking Date:</strong> <span id="ticketDate"></span></p>
+      </div>
+    </div>
+
+    <div class="action-btns no-print">
+      <button onclick="window.print()">Print Ticket</button>
+      <button class="btn-secondary" onclick="resetForm()">Book Another Ticket</button>
+    </div>
+  </div>
+
+  <script>
+    const bookingForm = document.getElementById('bookingForm');
+    const formPage = document.getElementById('formPage');
+    const ticketPage = document.getElementById('ticketPage');
+
+    bookingForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Gather input data
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const eventName = document.getElementById('event').value;
+      const qty = document.getElementById('ticketsCount').value;
+      
+      // Generate metadata
+      const ticketID = 'TCK-' + Math.floor(100000 + Math.random() * 900000);
+      const bookingDate = new Date().toLocaleString();
+
+      const bookingRecord = {
+        id: ticketID,
+        name: name,
+        email: email,
+        event: eventName,
+        quantity: qty,
+        date: bookingDate
+      };
+
+      // Save to localStorage
+      const existingBookings = JSON.parse(localStorage.getItem('ticketBookings')) || [];
+      existingBookings.push(bookingRecord);
+      localStorage.setItem('ticketBookings', JSON.stringify(existingBookings));
+
+      // Populate Ticket View
+      document.getElementById('ticketId').textContent = bookingRecord.id;
+      document.getElementById('ticketName').textContent = bookingRecord.name;
+      document.getElementById('ticketEmail').textContent = bookingRecord.email;
+      document.getElementById('ticketEvent').textContent = bookingRecord.event;
+      document.getElementById('ticketQty').textContent = bookingRecord.quantity;
+      document.getElementById('ticketDate').textContent = bookingRecord.date;
+
+      // Switch Screens
+      formPage.style.display = 'none';
+      ticketPage.style.display = 'block';
+    });
+
+    function resetForm() {
+      bookingForm.reset();
+      ticketPage.style.display = 'none';
+      formPage.style.display = 'block';
+    }
+   window.addEventListener('DOMContentLoaded', () => {
+    // 1. Grab parameters from the current URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedEvent = urlParams.get('event');
+
+    // 2. If an event parameter exists in the URL
+    if (selectedEvent) {
+      const selectDropdown = document.getElementById('event');
+
+      if (selectDropdown) {
+        // Check if the movie already exists in the dropdown list
+        let optionExists = Array.from(selectDropdown.options).some(
+          opt => opt.value.toLowerCase() === selectedEvent.toLowerCase()
+        );
+
+        // If it doesn't exist, dynamically add it on the fly!
+        if (!optionExists) {
+          const newOption = new Option(selectedEvent, selectedEvent);
+          selectDropdown.add(newOption);
+        }
+
+        // Set the dropdown value to match the clicked movie
+        selectDropdown.value = selectedEvent;
+      }
+    }
+  });
+  </script>
+
+</body>
+</html>

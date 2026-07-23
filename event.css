@@ -1,0 +1,21 @@
+section{
+    background-image:
+     url("https://cdn.vectorstock.com/i/500p/73/18/smiley-emoticon-like-film-director-vector-21917318.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-blend-mode: blend;
+    background-attachment: fixed;
+    width: 100px;
+    height: 100vh;
+}
+h1{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 64px;
+    text-align: center;
+    text-shadow: 10px;
+}
+h5{
+    font-size: medium;
+    text-align: center;
+    text-decoration: underline;
+}

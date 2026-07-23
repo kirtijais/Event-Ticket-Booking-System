@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sports</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'jost';
+        }
+        section{
+            width: 100%;
+            height: 100vh;
+            display: grid;
+            text-align: center;
+            place-items:center;
+            background-image: linear-gradient(
+                rgba(0,0,0,0.3),
+                rgba(0,0,0,0.3)
+            ),
+            url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBzqdkF7yCdNnbvvmOj1gMfx8XX_G0LMURRcm5Xk0kRQ&s=10");
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+            color: antiquewhite;
+            background-attachment: fixed;
+             background-blend-mode:normal;
+             font-size: larger;
+        }
+         .section2{
+            width: 100%;
+            height: 100vh;
+            text-align: center;
+            place-items:center;
+            display: grid;
+            background-image: linear-gradient(
+                rgba(0,0,0,0.3),
+                rgba(0,0,0,0.3)
+            ),
+            url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSGTpjF_DytDc8WbFmLP25PQvtr_8_Mxnwz9la9tAG7g&s=10");
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+            color: antiquewhite;
+            background-attachment: fixed;
+             background-blend-mode:normal;
+             font-size: larger;
+        }
+         .section3{
+            width: 100%;
+            height: 100vh;
+            text-align: center;
+            place-items:center;
+            display: grid;
+            background-image: linear-gradient(
+                rgba(0,0,0,0.3),
+                rgba(0,0,0,0.3)
+            ),
+            url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaWwtp2uSprb1GSEDXMEnV_Hvqvy7C9CWjwGEor8AtyQ&s=10");
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+            color: antiquewhite;
+            background-attachment: fixed;
+            background-blend-mode:normal;
+            font-size: larger;
+        }
+    </style>
+</head>
+<body>
+
+    <section>
+        <p>
+        Venue:Mumbai<br>
+        Date:14/7/26<br>
+        Price:150 $<br>
+        <button onclick="window.location.href='booking.html?event=' + encodeURIComponent('cricket')">Book Ticket</button>
+        </p>
+    </section>
+    <section class="section2">
+        <p>
+        Venue:Thane<br>
+        Date:2/7/26<br>
+        Price:150 $<br>
+        <button onclick="window.location.href='booking.html?event=' + encodeURIComponent('Hoky')">Book Ticket</button>
+    </p>
+    </section>
+    <section class="section3"> 
+        <p>
+        Venue:Kerla<br>
+        Date:25/7/26<br>
+        Price:150 $<br>
+        <button onclick="window.location.href='booking.html?event=' + encodeURIComponent('Khokho')">Book Ticket</button>
+        </p>
+    </section>
+</body>
+</html>

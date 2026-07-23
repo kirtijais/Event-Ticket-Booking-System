@@ -1,0 +1,49 @@
+html{
+    background-color: bisque;
+    scroll-behavior: smooth;
+    text-color:black;
+}
+h1{
+    font-size: 64px;
+    text-align: center;
+    color: black;
+    text-align: center;
+    text-spacing-trim: normal;
+
+}
+h3{
+    color:black;
+    font-size: 40px;
+    text-align: left;
+    text-decoration: underline;
+    text-spacing-trim: normal;
+
+}
+a:hover{
+    background-color: aliceblue;
+    color: red;
+    font-weight: bold;
+    text-align: right;
+
+}
+p{
+    font-size: 35px;
+    text-align: left;
+    text-decoration-color: black;
+    text-spacing-trim: normal;
+    
+}
+h5{
+    font-size: 37px;
+    text-align: left;
+    text-decoration: none;
+    text-spacing-trim: normal;
+
+}
+nav{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    text-align: justify;
+    text-decoration: none;
+    word-spacing: 35px;
+}
